@@ -1,34 +1,93 @@
-create file index.html
-convert the following google form link below into a responsive HTML website that can send a query string  directly into google sheets file. The form should be able to auto submit the data into google sheets without prompting the confirmation page from google form with using Google Form POST request.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟอร์มขอการเข้าถึงเว็ปไซต์ภายนอก</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.5em;
+            color: #6c757d;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 1em;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #d4a5bf;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #c48ab3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ฟอร์มขอการเข้าถึงเว็ปไซต์ภายนอก</h1>
+        <form action="[Google Form POST URL]" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+            <label for="name">ชื่อ-นามสกุล</label>
+            <input type="text" id="name" name="entry.XXXXXXX" required>
 
-The HTML form website design should be minimal with theme of pastel.
+            <label for="department">หน่วยงาน</label>
+            <select id="department" name="entry.YYYYYYY" required>
+                <option value="กองจัดการหนี้ 1">กองจัดการหนี้ 1</option>
+                <option value="กองจัดการหนี้ 2">กองจัดการหนี้ 2</option>
+                <option value="กองนโยบายและแผนการบริหารหนี้สาธารณะ">กองนโยบายและแผนการบริหารหนี้สาธารณะ</option>
+                <option value="กองบริหารการชำระหนี้">กองบริหารการชำระหนี้</option>
+                <option value="กองพัฒนาตลาดตราสารหนี้">กองพัฒนาตลาดตราสารหนี้</option>
+                <option value="กองบริหารการระดมทุนโครงการลงทุนภาครัฐ">กองบริหารการระดมทุนโครงการลงทุนภาครัฐ</option>
+                <option value="กองประเมินผลโครงการ">กองประเมินผลโครงการ</option>
+                <option value="สำนักงานเลขานุการกรม">สำนักงานเลขานุการกรม</option>
+                <option value="ศูนย์ข้อมูลและเทคโนโลยีสารสนเทศ">ศูนย์ข้อมูลและเทคโนโลยีสารสนเทศ</option>
+                <option value="กลุ่มพัฒนาระบบบริหาร">กลุ่มพัฒนาระบบบริหาร</option>
+                <option value="กลุ่มตรวจสอบภายใน">กลุ่มตรวจสอบภายใน</option>
+                <option value="กลุ่มกฎหมาย">กลุ่มกฎหมาย</option>
+                <option value="กลุ่มบริหารความเสี่ยงหนี้สาธารณะ">กลุ่มบริหารความเสี่ยงหนี้สาธารณะ</option>
+                <option value="กลุ่มบริหารและพัฒนาทรัพยากรบุคคล">กลุ่มบริหารและพัฒนาทรัพยากรบุคคล</option>
+            </select>
 
-The header of the form should display wording "ฟอร์มขอการเข้าถึงเว็ปไซต์ภายนอก"
+            <label for="position">ตำแหน่ง</label>
+            <input type="text" id="position" name="entry.ZZZZZZZ" required>
 
-Input of the form should be in the following order,
+            <label for="website">เว็ปไซต์ที่ต้องการใช้งาน</label>
+            <input type="text" id="website" name="entry.AAAAAAA" required>
 
-1. "ชื่อ-นามสกุล" with restriction to only text input
-
-2. "หน่วยงาน" with the following input option
-กองจัดการหนี้ 1
-กองจัดการหนี้ 2
-กองนโยบายและแผนการบริหารหนี้สาธารณะ
-กองบริหารการชำระหนี้
-กองพัฒนาตลาดตราสารหนี้
-กองบริหารการระดมทุนโครงการลงทุนภาครัฐ
-กองประเมินผลโครงการ
-สำนักงานเลขานุการกรม
-ศูนย์ข้อมูลและเทคโนโลยีสารสนเทศ
-กลุ่มพัฒนาระบบบริหาร
-กลุ่มตรวจสอบภายใน
-กลุ่มกฎหมาย
-กลุ่มบริหารความเสี่ยงหนี้สาธารณะ
-กลุ่มบริหารและพัฒนาทรัพยากรบุคคล
-
-3. "ตำแหน่ง" with restriction to only text input
-
-4. "เว็ปไซต์ที่ต้องการใช้งาน" with restriction to only text input
-
-
-[-------- Prefilled link Google Form ของเรา ----------]
-
+            <button type="submit">Submit</button>
+        </form>
+        <iframe name="hidden_iframe" style="display:none;"></iframe>
+    </div>
+</body>
+</html>
